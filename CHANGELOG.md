@@ -1,5 +1,13 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.5 - 5 September 2026
+
+- Updated the companion reference to the book's v2.0.5 review edition.
+- Increased the front-cover subtitle line spacing by 10 per cent.
+
+The manuscript wording, back cover and Field Guide protocol are unchanged.
+The protocol remains v0.3; this is a cover-spacing refresh only.
+
 ## v0.3 companion refresh for book v2.0.4 - 5 September 2026
 
 - Updated the companion reference to the book's v2.0.4 review edition.

@@ -13,7 +13,7 @@ book's front and back cover images. The complete book manuscript, other book
 production files, marketing drafts, and publishing system are not part of
 this public repository.
 
-Current protocol: **v0.3**. Current companion book: **v2.0.4 review edition,
+Current protocol: **v0.3**. Current companion book: **v2.0.5 review edition,
 5 September 2026**. The book and protocol use independent version numbers;
 this distribution refresh does not change the protocol contracts.
 
