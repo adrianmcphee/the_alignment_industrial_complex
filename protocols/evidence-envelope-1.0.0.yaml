@@ -1,0 +1,37 @@
+artifact_type: evidence_envelope
+schema_id: "urn:sia:end-of-alignment:evidence-envelope"
+schema_version: "1.0.0"
+id: evidence-envelope
+version: "1.0.0"
+purpose: >-
+  Define the portable identity carried by every process transition so governed
+  claims can be joined to decisions, deployments, models, evaluations, and
+  observed outcomes.
+required_join_keys:
+  - process_cycle_id
+  - decision_record_id
+  - deployment_digest
+  - model_digest
+  - evaluation_id
+required_on_every_transition:
+  event_identity:
+    - event_id
+    - occurred_at
+    - event_type
+  process_identity:
+    - subject_id
+    - process_cycle_id
+    - process_definition_version
+    - transition_id
+    - prior_state
+    - resulting_state
+  decision_identity:
+    - decision_record_id
+    - decision_owner
+  running_identity:
+    - source_commit
+    - deployment_digest
+    - configuration_id
+  model_identity:
+    - model_digest
+    - evaluation_id

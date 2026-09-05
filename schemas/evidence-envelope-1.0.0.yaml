@@ -1,0 +1,64 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:sia:end-of-alignment:evidence-envelope:1.0.0"
+title: Evidence envelope
+type: object
+additionalProperties: false
+required:
+  - artifact_type
+  - schema_id
+  - schema_version
+  - id
+  - version
+  - purpose
+  - required_join_keys
+  - required_on_every_transition
+x-optional:
+  - key_bindings
+  - event_stream
+  - presence_rules
+  - emission_points
+  - drift_join_recipes
+  - minimum_quality_checks
+  - privacy_boundary
+properties:
+  artifact_type: {const: evidence_envelope}
+  schema_id: {const: "urn:sia:end-of-alignment:evidence-envelope"}
+  schema_version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  id: {type: string, minLength: 1}
+  version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  purpose: {type: string, minLength: 1}
+  required_join_keys:
+    type: array
+    minItems: 5
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  required_on_every_transition:
+    type: object
+    required: [event_identity, process_identity, decision_identity, running_identity, model_identity]
+    additionalProperties:
+      type: array
+      minItems: 1
+      uniqueItems: true
+      items: {type: string, minLength: 1}
+  key_bindings:
+    type: object
+    minProperties: 1
+    additionalProperties: {type: string, minLength: 1}
+  event_stream: {type: string, minLength: 1}
+  presence_rules:
+    type: array
+    items: {type: string, minLength: 1}
+  emission_points:
+    type: array
+    items: {type: object, minProperties: 1}
+  drift_join_recipes:
+    type: array
+    items: {type: object, minProperties: 1}
+  minimum_quality_checks:
+    type: array
+    items: {type: string, minLength: 1}
+  privacy_boundary: {type: string, minLength: 1}

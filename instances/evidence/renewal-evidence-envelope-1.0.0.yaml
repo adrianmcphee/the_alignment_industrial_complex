@@ -1,0 +1,107 @@
+artifact_type: evidence_envelope
+schema_id: "urn:sia:end-of-alignment:evidence-envelope"
+schema_version: "1.0.0"
+id: renewal-evidence-envelope
+version: "1.0.0"
+purpose: >-
+  Emit enough identity on every process transition to join a governed claim to
+  the exact decision, implementation, deployment, model, evaluation, and live
+  outcome used by a drift report.
+required_join_keys:
+  - process_cycle_id
+  - decision_record_id
+  - deployment_digest
+  - model_digest
+  - evaluation_id
+event_stream: prod.renewal_transition_events
+key_bindings:
+  process_cycle_id: renewal_cycle_id
+  subject_id: policy_id
+required_on_every_transition:
+  event_identity:
+    - event_id
+    - occurred_at
+    - event_type
+  process_identity:
+    - subject_id
+    - process_cycle_id
+    - policy_id
+    - renewal_cycle_id
+    - process_definition_version
+    - transition_id
+    - prior_state
+    - resulting_state
+  decision_identity:
+    - decision_record_id
+    - decision_owner
+  running_identity:
+    - source_commit
+    - deployment_digest
+    - configuration_id
+  model_identity:
+    - model_digest
+    - evaluation_id
+presence_rules:
+  - >-
+    Every named field is present on every transition event. model_digest and
+    evaluation_id carry null only when no model participated in the decision.
+  - >-
+    A human override retains the model_digest and evaluation_id that produced
+    the referred decision and adds override_actor and override_reason.
+  - >-
+    Replay preserves event_id, occurred_at, process_cycle_id, and
+    decision_record_id; it adds replayed_at rather than inventing a new event.
+  - >-
+    deployment_digest identifies the serving artefact, not merely the latest
+    successful pipeline or intended release.
+emission_points:
+  - when: every accepted process transition
+    emits: complete evidence envelope
+  - when: every rejected or referred command
+    emits: attempted transition, controlled reason code, and owner
+  - when: customer exposure changes
+    emits: audience, configuration, deployment_digest, and effective time
+  - when: human review changes a model-assisted result
+    emits: original decision identity, reviewer identity, reason, and outcome
+drift_join_recipes:
+  - finding: F-041 amendment threshold mismatch
+    governed_sources:
+      - process_definition_version
+      - evaluation_id
+      - transition_id
+    running_sources:
+      - source_commit
+      - deployment_digest
+      - configuration_id
+    observation_keys:
+      - process_cycle_id
+      - decision_record_id
+      - deployment_digest
+    proves: which serving rule acted on which governed decision and population
+  - finding: F-044 model performance drift
+    governed_sources:
+      - model_digest
+      - evaluation_id
+      - process_definition_version
+    running_sources:
+      - deployment_digest
+      - configuration_id
+    observation_keys:
+      - process_cycle_id
+      - decision_record_id
+      - model_digest
+      - evaluation_id
+    proves: which model and evaluation governed each independently adjudicated case
+minimum_quality_checks:
+  - process_cycle_id is never blank after entry
+  - renewal_cycle_id is emitted as the bound domain key for process_cycle_id
+  - decision_record_id is unique within a process cycle and decision attempt
+  - deployment_digest resolves to a signed or otherwise immutable manifest
+  - model_digest resolves to immutable model bytes when non-null
+  - evaluation_id resolves to one current or expired evaluation record
+  - process_definition_version resolves to one immutable definition
+  - terminal events preserve the identity chain from the initiating event
+privacy_boundary: >-
+  Emit identifiers and controlled reason codes needed for reconstruction. Do
+  not place free-text customer communication, raw documents, or unrestricted
+  personal data in the evidence envelope.

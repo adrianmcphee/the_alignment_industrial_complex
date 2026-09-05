@@ -1,0 +1,124 @@
+artifact_type: validation_rule_set
+schema_id: "urn:sia:end-of-alignment:validation-rule-set"
+schema_version: "1.0.0"
+id: end-of-alignment-core-validation
+version: "2.0.0"
+rule_set_id: end-of-alignment-core-validation
+rule_set_version: "2.0.0"
+rules:
+  - id: V001
+    applies_to: all governed artefact instances, including protocols and rule sets
+    severity: error
+    assertion: artifact_type, schema_id, and schema_version resolve to one available schema
+  - id: V002
+    applies_to: all artefacts
+    severity: error
+    assertion: artifact version and schema_version use major.minor.patch notation
+  - id: V003
+    applies_to: process_definition
+    severity: error
+    assertion: every transition.from value exists in states
+  - id: V004
+    applies_to: process_definition
+    severity: error
+    assertion: every transition.to value exists in states
+  - id: V005
+    applies_to: process_definition
+    severity: error
+    assertion: state, invariant, and transition identifiers are unique in the definition
+  - id: V006
+    applies_to: process_definition
+    severity: error
+    assertion: every terminal_outcome exists in states
+  - id: V007
+    applies_to: process_definition
+    severity: error
+    assertion: every terminal_outcome is reachable from the entry state through declared transitions
+  - id: V008
+    applies_to: process_definition
+    severity: error
+    assertion: terminal states have no outgoing transition and the declared terminal cardinality is satisfiable
+  - id: V009
+    applies_to: process_definition
+    severity: error
+    assertion: every transition records an event and every invariant contains an inspectable rule or structured condition
+  - id: V010
+    applies_to: process_definition
+    severity: error
+    assertion: the definition requires process_cycle_id, decision_record_id, process_definition_version, and deployment identity through its invariants or evidence requirements
+  - id: V011
+    applies_to: process_definition and model_evaluation_record
+    severity: error
+    assertion: every referenced evaluation_id resolves and names the same process-definition version used by the decision
+  - id: V012
+    applies_to: process_definition and model_evaluation_record
+    severity: error
+    assertion: every forced_referral_condition in the evaluation appears in the governed process definition
+  - id: V013
+    applies_to: model_evaluation_record
+    severity: error
+    assertion: expiry.date postdates the evaluation generation or approval date and no use occurs after expiry
+  - id: V014
+    applies_to: model_evaluation_record
+    severity: error
+    assertion: dataset, feature, model, protocol, and validation identities resolve to immutable evidence
+  - id: V015
+    applies_to: published_contract
+    severity: error
+    assertion: every published event has one meaning and every event name is unique inside the contract version
+  - id: V016
+    applies_to: published_contract
+    severity: error
+    assertion: required_envelope contains event_id, occurred_at, process_cycle_id, process_definition_version, and decision_record_id
+  - id: V017
+    applies_to: process_definition and published_contract
+    severity: error
+    assertion: every emitted or accepted reason code resolves in the governed reason-code registry
+  - id: V018
+    applies_to: unit_charter
+    severity: error
+    assertion: every reserved right names its holder, trigger, evidence, decision clock, escalation, and return transition
+  - id: V019
+    applies_to: drift_report
+    severity: error
+    assertion: every finding can join through process_cycle_id, decision_record_id, deployment_digest, model_digest, and evaluation_id as applicable
+  - id: V020
+    applies_to: drift_report
+    severity: error
+    assertion: every material finding has a human disposition, owner, due date or review date, and evidence-based closure condition
+  - id: V021
+    applies_to: process_definition and model_evaluation_record
+    severity: error
+    assertion: every decision threshold in the process definition equals the approved threshold in the evaluation record it references, and the direction of the comparison is stated identically in both
+  - id: V022
+    applies_to: all artefacts declaring maturity
+    severity: error
+    assertion: every field named in maturity.mandatory_now is present and non-empty in the instance
+  - id: V023
+    applies_to: all artefacts declaring maturity
+    severity: error
+    assertion: a change of maturity.stage creates a new artefact version and records which earned_later fields the change added
+  - id: V024
+    applies_to: process_definition and published_contract
+    severity: error
+    assertion: every id in published_contracts resolves to an available contract artefact, and every structured publishes_event and published_contract pair resolves to an event declared by a contract in that list
+  - id: V025
+    applies_to: unit_charter and process_definition
+    severity: error
+    assertion: unit_charter.process resolves to an available process definition, and that definition's owner matches the charter's ordinary process accountability holder
+  - id: W001
+    applies_to: model_evaluation_record
+    severity: warn
+    assertion: expiry.date is more than 30 days ahead of the current date
+  - id: W002
+    applies_to: drift_report
+    severity: warn
+    assertion: coverage.percent meets or exceeds the declared coverage floor for the process
+  - id: W003
+    applies_to: drift_report
+    severity: warn
+    assertion: no finding remains open past its recorded due_date or review_due
+  - id: W004
+    applies_to: published_contract
+    severity: warn
+    assertion: no superseded major version remains published after observed consumer use has reached zero

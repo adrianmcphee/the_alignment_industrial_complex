@@ -1,0 +1,107 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:sia:end-of-alignment:unit-charter:1.1.0"
+title: Unit charter
+type: object
+additionalProperties: false
+required:
+  - artifact_type
+  - schema_id
+  - schema_version
+  - id
+  - version
+  - process
+  - purpose
+  - accountability
+  - delegated_authority
+  - binding_obligations
+  - institutional_roles
+  - reserved_independent_rights
+  - disputes
+  - review_and_revocation
+x-optional:
+  - composition_options
+  - composition_constraints
+  - retained_duties
+  - material_model_requirements
+  - shared_control_rule
+  - reserved_right_definition_requires
+  - reserved_right_accountability
+  - employment_and_entity_boundary
+  - contract_authority
+  - exposure_authority
+  - maturity
+properties:
+  artifact_type:
+    const: unit_charter
+  schema_id:
+    const: "urn:sia:end-of-alignment:unit-charter"
+  schema_version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  id: {type: string, minLength: 1}
+  version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  process: {type: string, minLength: 1}
+  purpose: {type: string, minLength: 1}
+  accountability:
+    type: object
+    minProperties: 1
+    additionalProperties: true
+  delegated_authority:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  composition_options: {type: array, items: {type: string}}
+  composition_constraints: {type: array, items: {type: string}}
+  binding_obligations:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  retained_duties: {type: array, items: {type: string}}
+  material_model_requirements: {type: array, items: {type: string}}
+  shared_control_rule: {type: string}
+  institutional_roles:
+    type: object
+    minProperties: 1
+    additionalProperties: true
+  reserved_independent_rights:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required:
+        - decision
+        - holder
+        - prohibited_holder
+        - trigger
+        - evidence
+        - decision_clock
+        - escalation
+        - return_transition
+      properties:
+        decision: {type: string, minLength: 1}
+        holder: {type: string, minLength: 1}
+        prohibited_holder: {type: string, minLength: 1}
+        trigger: {type: string, minLength: 1}
+        evidence: {type: string, minLength: 1}
+        decision_clock: {type: string, minLength: 1}
+        escalation: {type: string, minLength: 1}
+        return_transition: {type: string, minLength: 1}
+      additionalProperties: true
+  reserved_right_definition_requires: {type: array, items: {type: string}}
+  reserved_right_accountability: {type: object, additionalProperties: true}
+  employment_and_entity_boundary: {type: object, additionalProperties: true}
+  contract_authority: {type: object, additionalProperties: true}
+  exposure_authority: {type: object, additionalProperties: true}
+  disputes:
+    type: object
+    required: [challenge_requires, resolution_days]
+    additionalProperties: true
+  review_and_revocation:
+    type: object
+    required: [first_review_days, evidence, amend_or_revoke_when]
+    additionalProperties: true
+  maturity: {type: object, additionalProperties: true}

@@ -1,0 +1,41 @@
+artifact_type: published_contract
+schema_id: "urn:sia:end-of-alignment:published-contract"
+schema_version: "1.0.0"
+id: renewals.renewal_outcome.v0
+version: "0.1.0"
+owner: policy renewal unit
+purpose: publish the terminal result of one renewal cycle
+consumers:
+  - policy servicing
+published_events:
+  renewal_confirmed: a new policy identity exists
+  renewal_referred: normal work stopped with a named owner and reason
+required_envelope:
+  - event_id
+  - event_type
+  - occurred_at
+  - policy_id
+  - process_cycle_id
+  - renewal_cycle_id
+  - process_definition_version
+  - decision_record_id
+delivery:
+  guarantee: at_least_once
+  deduplication_key: event_id
+failure_semantics:
+  missing_required_field:
+    action: reject before publication
+  uncertain_terminal_publication:
+    action: reconcile against the immutable process event
+    prohibited_action: invent a second outcome
+compatibility:
+  major_version: 0
+  permitted_without_major_change:
+    - additive optional fields
+  requires_new_major_version:
+    - remove a required field
+    - change a field meaning
+    - change an event meaning
+change_authority:
+  meaning_owner: policy renewal unit
+reason_code_registry: renewal-reasons:0.1

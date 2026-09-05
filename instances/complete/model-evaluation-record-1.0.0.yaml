@@ -1,0 +1,72 @@
+artifact_type: model_evaluation_record
+schema_id: "urn:sia:end-of-alignment:model-evaluation-record"
+schema_version: "2.0.0"
+id: eval-renewal-amendment-008
+version: "1.0.0"
+generated_at: "2026-06-15T09:00:00Z"
+model:
+  id: amendment-materiality
+  version: "3.2.1"
+process_definition_version: "2.3.0"
+authority:
+  use_owner: Lisa Morgan
+  evidence_owner: decisioning steward
+  independent_validation_id: MV-2026-117
+  permitted_decision: route an amendment to referred
+  forced_referral_conditions:
+    - protected-risk marker is present
+    - unsupported term is present
+    - identity discrepancy is unresolved
+    - human stop decision is recorded
+  retained_fields:
+    - score
+    - model_version
+    - threshold
+    - reason
+    - override
+population:
+  description: adjudicated amendment requests from in-scope EU retail policies
+  observation_period:
+    from: "2026-01-01"
+    through: "2026-05-31"
+  size: 18000
+  exclusions:
+    - cases already requiring deterministic referral
+test:
+  reference_standard: amendment-referral:5.0
+  required_specialist_referral: 4000
+  threshold: 0.65
+  threshold_comparison: at_or_above
+  identified_for_referral: 3844
+  recall:
+    percent: 96.1
+    confidence_level_percent: 95
+    confidence_interval_percent: [95.5, 96.7]
+    approved_minimum_lower_bound_percent: 95
+  false_referral_rate:
+    percent: 9.4
+    confidence_interval_percent: [8.9, 9.9]
+    approved_maximum_percent: 12
+  selection_rule: >-
+    Highest tested threshold whose lower recall bound exceeded the approved
+    minimum while false referral remained below the approved maximum.
+provenance:
+  dataset:
+    id: renewal-amendments-2026-05
+    digest: sha256:4c91...7e20
+  protocol: amendment-referral:5.0
+  features: renewal-features:4.2
+  model_digest: sha256:91bd...aa08
+  process_definition_version: "2.3.0"
+  validation_id: MV-2026-117
+expiry:
+  date: "2026-09-30"
+  early_stop_conditions:
+    - production population cannot be matched
+    - lower recall bound falls below 95 percent
+    - protected harm appears
+    - a bound component changes materially
+  stopped_case_route: owned referral path
+  change_rule: >-
+    A changed threshold or revocation condition requires a new evaluation and
+    authority decision.

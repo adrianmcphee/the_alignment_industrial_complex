@@ -1,0 +1,45 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:sia:end-of-alignment:artefact-change-mechanics:1.0.0"
+title: Artefact change mechanics
+type: object
+additionalProperties: false
+required:
+  - artifact_type
+  - schema_id
+  - schema_version
+  - id
+  - version
+  - identity_rule
+  - common_rules
+  - artefact_types
+  - schema_change
+properties:
+  artifact_type: {const: artefact_change_mechanics}
+  schema_id: {const: "urn:sia:end-of-alignment:artefact-change-mechanics"}
+  schema_version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  id: {type: string, minLength: 1}
+  version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  identity_rule: {type: string, minLength: 1}
+  common_rules:
+    type: array
+    minItems: 1
+    items: {type: string, minLength: 1}
+  artefact_types:
+    type: object
+    minProperties: 5
+    additionalProperties:
+      type: object
+      required: [authority_decision]
+      additionalProperties: true
+  schema_change:
+    type: object
+    required: [new_major_version, new_minor_version, new_patch_version]
+    additionalProperties: false
+    properties:
+      new_major_version: {type: string, minLength: 1}
+      new_minor_version: {type: string, minLength: 1}
+      new_patch_version: {type: string, minLength: 1}

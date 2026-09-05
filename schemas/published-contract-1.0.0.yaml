@@ -1,0 +1,82 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:sia:end-of-alignment:published-contract:1.0.0"
+title: Published contract
+type: object
+additionalProperties: false
+required:
+  - artifact_type
+  - schema_id
+  - schema_version
+  - id
+  - version
+  - owner
+  - purpose
+  - consumers
+  - published_events
+  - required_envelope
+  - delivery
+  - failure_semantics
+  - compatibility
+  - change_authority
+x-optional:
+  - does_not
+  - excluded_content
+  - service_promise
+  - maturity
+  - reason_code_registry
+properties:
+  artifact_type:
+    const: published_contract
+  schema_id:
+    const: "urn:sia:end-of-alignment:published-contract"
+  schema_version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  id: {type: string, minLength: 1}
+  version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  owner: {type: string, minLength: 1}
+  purpose: {type: string, minLength: 1}
+  consumers:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  does_not:
+    type: array
+    items: {type: string, minLength: 1}
+  published_events:
+    type: object
+    minProperties: 1
+    additionalProperties: {type: string, minLength: 1}
+  required_envelope:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  excluded_content:
+    type: array
+    items: {type: string, minLength: 1}
+  delivery:
+    type: object
+    required: [guarantee, deduplication_key]
+    properties:
+      guarantee: {enum: [at_most_once, at_least_once, exactly_once_effect]}
+      deduplication_key: {type: string, minLength: 1}
+    additionalProperties: true
+  service_promise: {type: object, additionalProperties: true}
+  failure_semantics:
+    type: object
+    minProperties: 1
+    additionalProperties: true
+  compatibility:
+    type: object
+    required: [major_version, permitted_without_major_change, requires_new_major_version]
+    additionalProperties: true
+  change_authority:
+    type: object
+    required: [meaning_owner]
+    additionalProperties: true
+  maturity: {type: object, additionalProperties: true}
+  reason_code_registry: {type: string, minLength: 1}

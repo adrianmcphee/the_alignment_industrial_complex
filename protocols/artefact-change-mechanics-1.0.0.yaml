@@ -1,0 +1,90 @@
+artifact_type: artefact_change_mechanics
+schema_id: "urn:sia:end-of-alignment:artefact-change-mechanics"
+schema_version: "1.0.0"
+id: artefact-change-mechanics
+version: "1.0.0"
+identity_rule: >-
+  schema_version identifies the shape an artefact conforms to and changes only
+  when that schema changes. The Technical Field Guide version may change without
+  touching conforming artefacts.
+common_rules:
+  - an issued artefact is immutable; correction creates a new version
+  - every new version records the prior version, reason, owner, and effective time
+  - a semantic change requires the authority that owns the affected meaning
+  - production claims retain the exact artefact version that governed the work
+artefact_types:
+  process_definition:
+    new_major_version:
+      - change the customer promise or terminal outcome meaning
+      - remove or redefine a state, transition, invariant, or evidence identity
+      - change which process or owner carries the outcome
+    new_minor_version:
+      - add a backward-compatible state, transition, invariant, or evidence field
+      - add a governed reason code without changing existing meaning
+    new_patch_version:
+      - clarify prose or correct metadata without changing behaviour
+    authority_decision: required for every behavioural or semantic change
+  model_evaluation_record:
+    new_major_version:
+      - change permitted decision, model, population, metric, threshold, or forced referral
+      - change a revocation or expiry condition
+    new_minor_version:
+      - add a predeclared test or evidence source without changing permission
+    new_patch_version:
+      - correct non-semantic metadata with the correction recorded
+    authority_decision: required before changed permission or acceptance criteria take effect
+  published_contract:
+    new_major_version:
+      - remove a required field
+      - change a field or event meaning
+      - weaken a failure invariant or delivery identity
+    new_minor_version:
+      - add an optional field or backward-compatible event
+    new_patch_version:
+      - clarify documentation without changing consumer behaviour
+    authority_decision: provider and affected consumer owners approve semantic change
+  unit_charter:
+    new_major_version:
+      - allocate or revoke a decision right
+      - change accountability, a reserved right, or the process boundary
+    new_minor_version:
+      - add a constraint, threshold, evidence duty, or review route inside existing rights
+    new_patch_version:
+      - correct a reference or clarify wording without changing authority
+    authority_decision: holder of the amended institutional or delegated right approves
+  drift_report:
+    new_major_version:
+      - start a new observation window or comparison scope; create a new report id and reset version to 1.0.0
+    new_minor_version:
+      - add a finding based on evidence available in the original observation window
+    new_patch_version:
+      - correct a citation, calculation, or disposition while preserving the original record
+    authority_decision: findings do not change governed truth; any resulting change uses the authority of the affected artefact
+  evidence_envelope:
+    new_major_version:
+      - remove a required identity or change its meaning
+    new_minor_version:
+      - add an optional identity or compatible binding
+    new_patch_version:
+      - clarify a description without changing emitted evidence
+    authority_decision: owners of evidence production and consumption approve semantic change
+  artefact_change_mechanics:
+    new_major_version:
+      - change which version increment a governed change requires
+    new_minor_version:
+      - add mechanics for another governed artefact type
+    new_patch_version:
+      - clarify a rule without changing its effect
+    authority_decision: guide maintainer approves the governed protocol change
+  validation_rule_set:
+    new_major_version:
+      - change an existing assertion's meaning or remove a rule
+    new_minor_version:
+      - add a compatible rule or allowed severity
+    new_patch_version:
+      - clarify wording without changing pass or fail behaviour
+    authority_decision: rule-set owner approves every assertion change
+schema_change:
+  new_major_version: remove a required field or change an existing field meaning
+  new_minor_version: add an optional field or compatible allowed value
+  new_patch_version: clarify description or constraint without changing accepted instances

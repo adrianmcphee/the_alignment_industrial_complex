@@ -1,0 +1,100 @@
+artifact_type: published_contract
+schema_id: "urn:sia:end-of-alignment:published-contract"
+schema_version: "1.0.0"
+id: renewals.renewal_outcome.v2
+version: "2.1.0"
+owner: policy renewal unit
+purpose: report what happened in a renewal cycle
+consumers:
+  - policy servicing
+  - billing and collections
+  - customer communications
+  - authorised analytical consumers
+does_not:
+  - expose the unit's internal state machine
+  - permit a consumer to reinterpret a referral as a decline
+published_events:
+  offer_issued: exact offer exposed to the declared customer audience
+  renewal_confirmed: new policy identity exists and every completion invariant was satisfied
+  renewal_referred: normal path stopped under a named authority or control reason and has an owner
+  renewal_declined: explicit customer decision recorded
+  policy_lapsed: deadline passed after required notices and without a prior accepted command
+required_envelope:
+  - event_id
+  - event_type
+  - occurred_at
+  - policy_id
+  - process_cycle_id
+  - renewal_cycle_id
+  - correlation_id
+  - process_definition_version
+  - decision_record_id
+  - terms_version
+  - outcome
+  - effective_at_when_applicable
+  - controlled_reason_code
+excluded_content:
+  - personal communication content
+  - unrestricted free text
+delivery:
+  guarantee: at_least_once
+  ordering_scope: renewal_cycle_id
+  cross_customer_ordering: false
+  cross_policy_ordering: false
+  deduplication_key: event_id
+  replay_identity_rule: preserve original event_id and occurred_at
+  online_replay_days: 90
+  archive_retention: institutional retention period
+service_promise:
+  event: terminal event
+  maximum_publication_delay_minutes: 5
+  percentile: 99
+  rolling_window_days: 7
+  published_evidence:
+    - availability
+    - delay
+    - replay
+    - rejection
+    - schema validation
+  breach_rule: >-
+    Missing the service objective creates a contract incident and does not
+    change the semantic meaning of an event that eventually arrives.
+failure_semantics:
+  missing_required_field:
+    action: reject before publication
+    evidence: provider contract-error stream
+  consumer_outage:
+    action: retain and replay event
+    renewal_rollback: false
+  uncertain_terminal_publication:
+    reconcile_against: immutable process event
+    action: reissue the same event_id
+    prohibited_action: invent a second outcome
+compatibility:
+  major_version: 2
+  permitted_without_major_change:
+    - additive optional fields
+    - new reason codes inside the governed registry
+  requires_new_major_version:
+    - remove a field
+    - change a field's meaning
+    - weaken an invariant
+    - change the interpretation of an event
+  ordinary_major_change_notice_days: 30
+  migration_rules:
+    - publish both versions during a declared migration
+    - identify every remaining consumer
+    - retire the old version only after observed use reaches zero
+change_authority:
+  meaning_owner: policy renewal unit
+  adaptation_owner: each consuming unit
+  proposal_requires:
+    - customer or operating reason
+    - affected consumers
+    - migration evidence
+    - expiry of the old version
+    - rollback path
+  urgency_rule: >-
+    Security or legal urgency may shorten the notice period under the charter
+    but does not permit an undocumented semantic change.
+reason_code_registry: renewal-reasons:1.0

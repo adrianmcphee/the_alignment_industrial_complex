@@ -1,0 +1,171 @@
+artifact_type: drift_report
+schema_id: "urn:sia:end-of-alignment:drift-report"
+schema_version: "1.1.0"
+id: drift-2026-08-17-renewals-0041
+version: "1.0.0"
+generated_at: "2026-08-17T06:15:00Z"
+observation_window:
+  from: "2026-08-10T00:00:00Z"
+  through: "2026-08-16T23:59:59Z"
+scope:
+  process_definition_version: "2.3.0"
+  evaluation_id: eval-renewal-amendment-008
+  contract_version: "2.1.0"
+  source_commit: 9f4c2a1
+  deployment: renewals-api:2026.08.15.3
+  rule_set: renewal-eligibility:7.4
+  exposure_configuration: renewal-amendments:cohort-eu-05
+human_reviewer: renewal domain steward
+status: actionable_after_review
+autonomous_compliance_decision: false
+coverage:
+  matched_cycles: 12418
+  excluded_cycles: 406
+  percent: 96.8
+  floor_percent: 95.0
+  exclusion_reason: source policy version unavailable for manually reconstructed legacy cycles
+  limitation: excluded population remains an explicit evidence limitation
+findings:
+  - id: F-041
+    title: amendment threshold mismatch
+    severity: high
+    declared_claim:
+      sources:
+        - evaluation eval-renewal-amendment-008
+        - invariant I04
+        - transition T07
+      rule: materiality_score at or above 0.65 enters referred
+    running_system:
+      rule: referral begins at materiality_score of 0.72
+    observed_consequence:
+      amended_renewals: 1842
+      score_range: [0.65, 0.7199]
+      returned_to_offer_prepared: 218
+      later_renewed: 173
+    conclusion:
+      established:
+        - unapproved decision behaviour
+        - affected population
+      not_established:
+        - customer harm
+    provenance:
+      claim_sources:
+        - id: eval-renewal-amendment-008
+          digest: sha256:6f81...be09
+        - id: process/policy-renewal-v2.3.0.yaml
+          locations:
+            - invariant I04
+            - transition T07
+          digest: sha256:6b8d...91ce
+      implementation_source:
+        path: services/renewals/amendment-authority.ts
+        lines: 118-134
+        commit: 9f4c2a1
+      deployment_source:
+        manifest: renewals-api:2026.08.15.3
+        digest: sha256:2a71...44bf
+      configuration_source:
+        id: renewal-eligibility:7.4
+        retrieved_at: "2026-08-17T05:40:12Z"
+      observation_source:
+        dataset: prod.renewal_transition_events
+        query: RQ-8841
+        result_digest: sha256:93ad...0fe2
+      join_keys:
+        - process_cycle_id
+        - renewal_cycle_id
+        - decision_record_id
+        - deployment_digest
+        - model_digest
+        - evaluation_id
+    human_disposition:
+      status: confirmed_divergence
+      interpretation: implementation is wrong relative to the approved definition
+      owner: Lisa Morgan
+      immediate_actions:
+        - stop amendment exposure for scores at or above 0.65
+        - restore the declared threshold
+        - preserve the 218-cycle cohort
+        - review control consequences
+        - review customer consequences
+      due_date: "2026-08-19"
+      closure_requires:
+        - reviewed source change
+        - deployment identity
+        - back-test against affected cohort
+        - controlled re-exposure
+        - seven days of production evidence
+      authority_rule: changing I04 to match code is a new authority decision, not remediation
+  - id: F-044
+    title: model performance drift
+    severity: high
+    declared_claim:
+      source: evaluation eval-renewal-amendment-008
+      rule: lower 95 percent confidence bound for referral recall remains at or above 95 percent
+    production_sample:
+      adjudication: human
+      required_referral: 120
+      model_referred: 104
+      observed_recall_percent: 86.7
+      confidence_level_percent: 95
+      confidence_interval_percent: [79.4, 91.6]
+      passed_below_threshold_but_later_required_referral: 16
+    conclusion:
+      established:
+        - performance outside the approved condition
+      not_established:
+        - customer harm
+        - cause of performance movement
+    provenance:
+      evaluation_source:
+        id: eval-renewal-amendment-008
+        digest: sha256:6f81...be09
+      model_source:
+        id: amendment-materiality:3.2.1
+        digest: sha256:91bd...aa08
+        feature_definition: renewal-features:4.2
+      production_cohort:
+        dataset: prod.amendment_assessments
+        query: RQ-8853
+        result_digest: sha256:8bb2...1cd4
+      independent_adjudication:
+        sample: ADJ-2026-08-17-04
+        protocol: amendment-referral:5.0
+        reviewer_agreement_record: AGR-04
+      join_keys:
+        - process_cycle_id
+        - renewal_cycle_id
+        - decision_record_id
+        - deployment_digest
+        - model_digest
+        - evaluation_id
+    human_disposition:
+      status: confirmed_revocation_condition_breach
+      owner: Lisa Morgan
+      oversight: the control holder as accountable SMF
+      review_due: "2026-08-19"
+      actions:
+        - route all model-scored amendments to the owned human referral path
+        - preserve the 16 affected cases
+        - investigate population change
+        - investigate feature change
+        - investigate model change
+      re_exposure_requires:
+        - new evaluation against a declared population
+        - independent validation
+        - controlled production evidence
+      authority_rule: lowering required recall is a new authority decision, not closure
+limitations:
+  compared:
+    - declared process claims
+    - evaluation claims
+    - contract claims
+    - source
+    - configuration
+    - deployment
+    - observed events
+  requires_human_and_institutional_judgement:
+    - commercial optimality
+    - cause of model movement
+    - harm in the excluded legacy population
+  report_claim: disagreements and evidence boundaries are exact

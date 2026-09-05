@@ -1,0 +1,220 @@
+artifact_type: unit_charter
+schema_id: "urn:sia:end-of-alignment:unit-charter"
+schema_version: "1.1.0"
+id: policy_renewal_unit
+version: "1.4.0"
+process: policy_renewal
+purpose: >-
+  Join accountability for the renewal promise to the means of performance
+  while preserving institutional duties and independent challenge.
+accountability:
+  institutional:
+    holder: the control holder
+    role: second-line control leader and accountable SMF
+  ordinary_process:
+    holder: Lisa Morgan
+delegated_authority:
+  - process meaning
+  - operating procedure
+  - source and service design
+  - operational data
+  - published contracts
+  - prioritisation
+  - deployment schedule
+  - staged exposure
+  - first-line controls
+  - supplier use inside the process
+  - spending within the quarterly envelope
+composition_options:
+  - employees
+  - software
+  - agents
+  - suppliers
+  - partners
+composition_constraints:
+  - law
+  - employment policy
+  - delegated capital
+  - charter constraints
+binding_obligations:
+  - insurance
+  - consumer
+  - conduct
+  - privacy
+  - records
+  - accessibility
+  - financial crime
+  - model risk
+  - operational resilience
+  - employment
+retained_duties:
+  - accountable senior manager duties
+  - governing body duties
+material_model_requirements:
+  - inventory
+  - development evidence
+  - independent validation
+  - monitoring
+  - exit provisions
+shared_control_rule: binds only when law or declared institutional design requires that exact mechanism
+institutional_roles:
+  legal_and_compliance:
+    rights:
+      - interpret obligations
+      - require an outcome
+      - stop an unlawful act
+  specialist_risk:
+    rights:
+      - set classification and thresholds
+      - aggregate exposure
+      - challenge design
+      - require remediation
+      - restrict activity at a declared threshold
+  security:
+    rights:
+      - set baseline controls
+      - test evidence
+  finance:
+    rights:
+      - receive unconditional cost visibility
+      - receive unconditional allocation visibility
+  employment_operations:
+    rights:
+      - execute lawful employment services
+  independent_audit:
+    rights:
+      - test the unit
+      - test institutional functions
+  ordinary_authority_excluded:
+    - process design
+    - backlog
+    - architecture
+    - tooling
+    - release
+reserved_independent_rights:
+  - decision: validate a material model
+    holder: independent model validation
+    prohibited_holder: unit that uses the model
+    trigger: material model use or material model change
+    evidence: evaluation record and independent validation record
+    decision_clock: before model exposure
+    escalation: the control holder as accountable SMF
+    return_transition: validated use returns to controlled exposure
+  - decision: decide an appeal against the original conduct decision
+    holder: independent conduct appeal function
+    prohibited_holder: unit that made the original decision
+    trigger: customer submits an eligible appeal
+    evidence: original decision record, appeal evidence, and customer account
+    decision_clock: governed appeal service level
+    escalation: accountable conduct officer
+    return_transition: appeal outcome returns to the owned customer process
+  - decision: release a payment instruction where dual control applies
+    holder: authorised independent payment checker
+    prohibited_holder: holder that created the instruction
+    trigger: instruction reaches the declared dual-control threshold
+    evidence: instruction, authority, beneficiary, amount, and source decision
+    decision_clock: before instruction release
+    escalation: payments control owner
+    return_transition: released or rejected instruction returns to the renewal process
+  - decision: certify control effectiveness for independent assurance
+    holder: independent assurance
+    prohibited_holder: unit whose controls are being certified
+    trigger: scheduled assurance or a declared control failure
+    evidence: control design, operating sample, exceptions, and remediation record
+    decision_clock: stated in the assurance plan
+    escalation: governing body or delegated audit committee
+    return_transition: conclusion and required actions return to the charter review
+reserved_right_definition_requires:
+  - holder
+  - entry threshold
+  - evidence
+  - decision clock
+  - escalation
+  - return transition
+reserved_right_accountability:
+  unit: complete renewal outcome and elapsed time
+  independent_holder: protected decision
+  general_approval_right_created: false
+employment_and_entity_boundary:
+  must_name:
+    - each employing legal entity
+    - each risk-carrying legal entity
+  retained_local_rights:
+    - employment authority
+    - consultation
+    - collective rights
+    - worker protections
+  inter_company_capability_requires:
+    - owner
+    - price
+    - allocation basis
+    - evidence of use
+    - service contract
+  unit_right: decide what capability it requires
+  prohibitions:
+    - instruct an entity to act unlawfully
+    - hide an unpriced dependency inside a central pool
+contract_authority:
+  internal_change_without_consumer_approval: true
+  condition: published contracts remain satisfied
+  semantic_change_rule: follow compatibility and migration rules in contract version 2.1.0
+  adjacent_unit_prohibitions:
+    - direct database access as a substitute for a contract
+    - standing approval rights as a substitute for a contract
+exposure_authority:
+  permitted_when_recorded:
+    - source
+    - deployable
+    - configuration
+    - audience
+    - observation window
+    - rollback path
+    - guardrails
+  automatic_pause_conditions:
+    - legal threshold crossed
+    - safety threshold crossed
+    - required control evidence disappears
+    - complaint guardrail breaches its declared limit
+    - harm guardrail breaches its declared limit
+    - material model operates outside validation
+    - production identity cannot be established
+  earlier_stop_holder: Lisa Morgan
+  restart_rule: evidence against the recorded condition, not a new committee
+disputes:
+  challenge_requires:
+    - exact charter clause
+    - contract
+    - evidence
+    - threshold
+    - requested remedy
+  resolution_days: 5
+  unresolved_ordinary_boundary_decision: accountable executive decides once
+  authority_during_first_six_months: remains in force
+  hold_conditions:
+    - law
+    - safety
+    - conduct
+    - declared risk threshold
+  exception_requires:
+    - owner
+    - reason
+    - expiry
+    - review date
+review_and_revocation:
+  first_review_days: 90
+  later_frequency: quarterly
+  evidence:
+    - customer outcomes
+    - decision time
+    - control performance
+    - contract incidents
+    - cost
+    - coordination demand
+    - governance interventions
+    - authority exceptions
+  amend_or_revoke_when:
+    - unit cannot contain risk
+    - contract and governance overhead exceed coordination removed
+    - local optimisation harms a material cross-process outcome
+    - capability authority cannot be exercised lawfully
+  identity_rule: unit name survives only while authority and evidence survive

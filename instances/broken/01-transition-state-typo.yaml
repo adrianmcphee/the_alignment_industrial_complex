@@ -1,0 +1,244 @@
+artifact_type: process_definition
+schema_id: "urn:sia:end-of-alignment:process-definition"
+schema_version: "2.0.0"
+id: policy_renewal
+version: "2.3.0"
+owners:
+  process: Lisa Morgan
+  definition: policy renewal unit domain steward
+change_authority: >-
+  A change to a state, transition, invariant, or reason code requires Lisa
+  Morgan's approval and a new process-definition version.
+entry_event: renewal_due_45_days
+entry_subject: active policy
+entry_state: due
+terminal_outcomes:
+  - renewed
+  - declined
+  - lapsed
+  - referred
+terminal_outcome_cardinality: exactly_one
+customer_promise: >-
+  An eligible customer receives terms derived from the current policy and
+  approved underwriting rules with enough time to act before expiry.
+  Acceptance creates a renewed policy only after required controls and payment
+  conditions complete. An amendment outside delegated authority enters a
+  visible referral path.
+published_contracts:
+  - renewals.renewal_outcome.v2
+entry_conditions:
+  - policy identity is resolvable
+  - current policy is active
+  - expiry timestamp is known
+  - governing legal entity is known
+  - customer communication route has a declared status
+  - source policy version is immutable for the renewal cycle
+missing_entry_condition_outcome: referred
+states:
+  due: renewal window opened
+  eligibility_checked: eligibility decision and rule-set version recorded
+  terms_requested: waiting for priced terms from underwriting
+  offer_prepared: approved offer not yet exposed
+  offer_issued: exact terms made available to the customer
+  amendment_assessment: requested change under evaluation
+  accepted: customer intent recorded but policy not yet renewed
+  payment_confirming: waiting for required collection evidence
+  renewed: terminal
+  declined: terminal
+  lapsed: terminal
+  referred: terminal
+invariants:
+  - id: I01
+    name: identity
+    rule: >-
+      Every state change carries policy_id, process_cycle_id, prior_event_id,
+      process_definition_version, decision_record_id, deployment_digest, and
+      correlation_id.
+      No operator, service, or agent may replace a missing identity with a
+      description.
+  - id: I02
+    name: terms
+    rule: >-
+      offer_prepared requires source_policy_version,
+      underwriting_terms_version, price, tax_and_fee_basis, covered_period,
+      expiry_time, and legal_entity. The rendered document and machine record
+      name the same terms version.
+  - id: I03
+    name: exposure
+    rule: >-
+      offer_issued requires controlled customer exposure. Document generation,
+      queue placement, or a successful provider response does not establish
+      exposure. Record channel, audience, timestamp, and communication evidence.
+  - id: I04
+    name: amendment_authority
+    evaluation_id: eval-renewal-amendment-008
+    model: amendment-materiality:3.2.1
+    referral_threshold: 0.65
+    threshold_comparison: at_or_above
+    forced_referral_conditions:
+      - materiality_score is at or above 0.65
+      - protected-risk marker is present
+      - unsupported term is present
+      - identity discrepancy is unresolved
+      - human stop decision is recorded
+    permitted_return:
+      state: offer_prepared
+      conditions:
+        - materiality_score is below 0.65
+        - renewal-eligibility:7.4 records an explicit permitted reason
+  - id: I05
+    name: completion
+    renewed_requires:
+      - accepted terms
+      - satisfied payment conditions
+      - completed mandatory controls
+      - effective policy identity
+    rule: >-
+      Publish exactly one terminal outcome for each cycle. Replayed commands may
+      reproduce the same outcome event but may not create a second renewal.
+transitions:
+  - id: T01
+    from: due
+    to: eligibility_checked
+    event: eligibility_evaluation_completed
+    records:
+      - result
+      - rule_set_version
+      - excluded_reasons
+      - evidence_timestamp
+    exception: ineligible, ambiguous, or unresolvable cases enter referred with a reason code
+  - id: T02
+    from: eligibility_checked
+    to: terms_requested
+    event: eligible
+    action: call underwriting.renewal_terms.v3 with immutable source policy and renewal context
+    retry_rule: preserve request identity
+  - id: T03
+    from: terms_requested
+    to: offer_prepared
+    event: terms_received
+    conditions:
+      - satisfies I02
+      - matches request identity
+    rejection_rule: retain and reject superseded or mismatched responses
+  - id: T04
+    from: offer_prepared
+    to: offer_issued
+    event: customer_exposure_verified
+    records:
+      - offer_artifact
+      - channel
+      - audience
+      - communication_evidence
+    publishes_event: offer_issued
+    published_contract: renewals.renewal_outcome.v2
+  - id: T05
+    from: offer_issued
+    to: amendment_assessment
+    event: customer_requests_amendment
+    records:
+      - changed_fields
+      - authentication
+      - offer_version
+      - model_id
+      - evaluation_id
+      - score
+      - threshold
+      - population_check
+      - override
+    superseded_offer_result: recoverable rejection
+  - id: T06
+    from: amendment_assessment
+    to: offer_prepared
+    event: amendment_permitted
+    conditions:
+      - score is below the I04 threshold
+      - renewal-eligibility:7.4 records a permitted reason
+    version_rule: new terms receive a new version and preserve the prior offer
+  - id: T07
+    from: amendment_assessment
+    to: refered
+    event: amendment_outside_authority
+    records:
+      - rule
+      - threshold
+      - protected_condition
+    service_rule: referral has an owner and a service clock
+  - id: T08
+    from: offer_issued
+    to: accepted
+    event: customer_accepts
+    records:
+      - exact_offer
+      - authentication_evidence
+    superseded_or_expired_offer_result: return current terms with a rejection
+  - id: T09
+    from: accepted
+    to:
+      - payment_confirming
+      - renewed
+    event: acceptance_validated
+    collection_contract: payments.collection_confirmation.v2
+    no_collection_rule: proceed to T10 with reason recorded
+  - id: T10
+    from: payment_confirming
+    to: renewed
+    event: collection_condition_satisfied
+    actions:
+      - create effective policy identity
+      - complete mandatory controls
+      - publish renewal_confirmed
+    completion_rule: provider acknowledgement alone is insufficient
+  - id: T11
+    from: offer_issued
+    to: declined
+    event: customer_declines
+    records:
+      - offer_version
+      - customer_evidence
+      - supplied_reason
+    publishes_event: renewal_declined
+    published_contract: renewals.renewal_outcome.v2
+  - id: T12
+    from: offer_issued
+    to: lapsed
+    event: renewal_deadline_passed
+    requires:
+      - declared deadline
+      - reminder evidence
+      - absence of an accepted command
+    publishes_event: policy_lapsed
+    published_contract: renewals.renewal_outcome.v2
+failure_behaviour:
+  underwriting_unavailable:
+    at_30_days_before_expiry:
+      - retry with stable request identity
+      - open an owned operational case
+    at_21_days_before_expiry: escalate to Lisa Morgan
+  payment_timeout: remain in payment_confirming
+  provider_acknowledgement: never treat as completion
+  duplicate_commands: answer idempotently
+  exposure_stop_triggers:
+    - material complaint
+    - control failure
+    - unexplained increase in referrals
+  recovery_rule: existing customers remain on a declared recovery path
+evidence_required:
+  - immutable event for every transition
+  - source policy version
+  - rule version
+  - model version
+  - evaluation version
+  - score and threshold where used
+  - terms response
+  - decision record
+  - offer artifact hash
+  - customer exposure record
+  - acceptance or decline evidence
+  - payment evidence where applicable
+  - terminal policy identity
+  - all human overrides
+evidence_completion_rule: >-
+  The process is incomplete if an outcome exists without the evidence needed to
+  reconstruct how it became true.
+reason_code_registry: renewal-reasons:1.0

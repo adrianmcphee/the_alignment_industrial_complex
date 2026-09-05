@@ -1,0 +1,81 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:sia:end-of-alignment:drift-report:1.1.0"
+title: Drift report
+type: object
+additionalProperties: false
+required:
+  - artifact_type
+  - schema_id
+  - schema_version
+  - id
+  - version
+  - generated_at
+  - observation_window
+  - scope
+  - human_reviewer
+  - status
+  - coverage
+  - findings
+  - limitations
+x-optional:
+  - autonomous_compliance_decision
+  - maturity
+properties:
+  artifact_type:
+    const: drift_report
+  schema_id:
+    const: "urn:sia:end-of-alignment:drift-report"
+  schema_version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  id: {type: string, minLength: 1}
+  version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  generated_at: {type: string, format: date-time}
+  observation_window:
+    type: object
+    required: [from, through]
+    properties:
+      from: {type: string, format: date-time}
+      through: {type: string, format: date-time}
+    additionalProperties: false
+  scope:
+    type: object
+    required: [process_definition_version, source_commit, deployment]
+    additionalProperties: true
+  human_reviewer: {type: string, minLength: 1}
+  status:
+    enum: [draft, actionable_after_review, closed, superseded]
+  autonomous_compliance_decision: {type: boolean}
+  maturity: {type: object, additionalProperties: true}
+  coverage:
+    type: object
+    required: [matched_cycles, excluded_cycles, limitation]
+    additionalProperties: true
+  findings:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [id, title, severity, declared_claim, conclusion, provenance, human_disposition]
+      anyOf:
+        - required: [running_system]
+        - required: [production_sample]
+        - required: [evidence_gap]
+      properties:
+        id: {type: string, minLength: 1}
+        title: {type: string, minLength: 1}
+        severity: {enum: [low, medium, high, critical]}
+        declared_claim: {type: object, minProperties: 1}
+        running_system: {type: object, minProperties: 1}
+        production_sample: {type: object, minProperties: 1}
+        evidence_gap: {type: object, minProperties: 1}
+        conclusion: {type: object, minProperties: 1}
+        provenance: {type: object, minProperties: 1}
+        human_disposition: {type: object, minProperties: 1}
+      additionalProperties: true
+  limitations:
+    type: object
+    required: [compared, requires_human_and_institutional_judgement, report_claim]
+    additionalProperties: true

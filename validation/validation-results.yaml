@@ -1,0 +1,153 @@
+guide_version: '0.3'
+validated_at: '2026-08-26'
+rule_set_version: 2.0.0
+validation_provenance:
+  rule_set_id: end-of-alignment-core-validation
+  rule_set_version: 2.0.0
+  schema_versions:
+    artefact_change_mechanics: 1.0.0
+    drift_report: 1.1.0
+    evidence_envelope: 1.0.0
+    model_evaluation_record: 2.0.0
+    process_definition: 2.0.0
+    published_contract: 1.0.0
+    unit_charter: 1.1.0
+    validation_rule_set: 1.0.0
+  validation_archive_digest:
+    algorithm: sha256
+    format: canonical-path-byte-stream-v1
+    scope: relative path and bytes of the validator, requirements, schemas, rules, protocols, governed
+      artefacts, and broken fixtures; excludes generated results
+    value: 6b2fd1e96c39141bff40d91efa05860b0f91366da4a0a06456b07764ea308f50
+complete_packet:
+  schema_contracts: 8
+  governed_artefacts: 11
+  schema_errors: []
+  rule_results:
+  - id: V001
+    severity: error
+    status: pass
+  - id: V002
+    severity: error
+    status: pass
+  - id: V003
+    severity: error
+    status: pass
+  - id: V004
+    severity: error
+    status: pass
+  - id: V005
+    severity: error
+    status: pass
+  - id: V006
+    severity: error
+    status: pass
+  - id: V007
+    severity: error
+    status: pass
+  - id: V008
+    severity: error
+    status: pass
+  - id: V009
+    severity: error
+    status: pass
+  - id: V010
+    severity: error
+    status: pass
+  - id: V011
+    severity: error
+    status: pass
+  - id: V012
+    severity: error
+    status: pass
+  - id: V013
+    severity: error
+    status: pass
+  - id: V014
+    severity: error
+    status: pass
+  - id: V015
+    severity: error
+    status: pass
+  - id: V016
+    severity: error
+    status: pass
+  - id: V017
+    severity: error
+    status: pass
+  - id: V018
+    severity: error
+    status: pass
+  - id: V019
+    severity: error
+    status: pass
+  - id: V020
+    severity: error
+    status: pass
+  - id: V021
+    severity: error
+    status: pass
+  - id: V022
+    severity: error
+    status: pass
+  - id: V023
+    severity: error
+    status: not_applicable
+    details:
+    - The packet contains initial maturity declarations, not a maturity-stage change.
+  - id: V024
+    severity: error
+    status: pass
+  - id: V025
+    severity: error
+    status: pass
+  - id: W001
+    severity: warn
+    status: pass
+  - id: W002
+    severity: warn
+    status: pass
+  - id: W003
+    severity: warn
+    status: warn
+    details:
+    - 'drift-2026-08-17-renewals-0041.F-041: recorded date 2026-08-19 has passed'
+    - 'drift-2026-08-17-renewals-0041.F-044: recorded date 2026-08-19 has passed'
+  - id: W004
+    severity: warn
+    status: not_applicable
+    details:
+    - No superseded major version is declared in the worked contracts.
+  summary:
+    error_failures: 0
+    warnings: 1
+    not_applicable: 2
+broken_packet:
+- fixture: instances/broken/01-transition-state-typo.yaml
+  schema_status: pass
+  expected_rules:
+  - V004
+  detected_rules:
+  - V004
+  expectation_met: true
+- fixture: instances/broken/02-expiry-before-generation.yaml
+  schema_status: pass
+  expected_rules:
+  - V013
+  detected_rules:
+  - V013
+  expectation_met: true
+- fixture: instances/broken/03-threshold-mismatch.yaml
+  schema_status: pass
+  expected_rules:
+  - V021
+  detected_rules:
+  - V021
+  expectation_met: true
+- fixture: instances/broken/04-reserved-right-holder-conflict.yaml
+  schema_status: pass
+  expected_rules: []
+  detected_rules: []
+  expectation_met: true
+  known_gap: A reserved-right holder can equal the prohibited holder. V018 tests presence, not mutual
+    exclusion against an institutional register.

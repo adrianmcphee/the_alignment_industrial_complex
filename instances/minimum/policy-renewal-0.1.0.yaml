@@ -1,0 +1,65 @@
+artifact_type: process_definition
+schema_id: "urn:sia:end-of-alignment:process-definition"
+schema_version: "2.0.0"
+id: policy_renewal
+version: "0.1.0"
+maturity:
+  stage: minimum_viable
+  mandatory_now:
+    - published_contracts
+  earned_later:
+    - detailed entry conditions
+    - model evaluation linkage
+    - full reason-code registry
+    - provider-specific failure behaviour
+    - complete evidence inventory
+owners:
+  process: Lisa Morgan
+  definition: policy renewal unit domain steward
+change_authority: >-
+  Lisa Morgan approves changes to a state, transition, invariant, or published
+  meaning. Every approved change creates a new process-definition version.
+entry_event: renewal_due
+entry_subject: active_policy
+entry_state: due
+customer_promise: >-
+  An eligible customer receives renewal terms in time to accept them or enters
+  a visible referral path with an owner.
+states:
+  due: renewal is ready to begin
+  offer_issued: exact terms reached the customer
+  renewed: terminal, new policy identity exists
+  referred: terminal, normal work stopped under a named reason and owner
+terminal_outcomes:
+  - renewed
+  - referred
+terminal_outcome_cardinality: exactly_one
+invariants:
+  - id: I01
+    name: identity
+    rule: >-
+      Every state change carries policy_id, process_cycle_id,
+      process_definition_version, decision_record_id, and deployment_digest.
+  - id: I02
+    name: one_outcome
+    rule: Each process_cycle_id produces exactly one terminal outcome.
+transitions:
+  - id: T01
+    from: due
+    to: offer_issued
+    event: customer_exposure_verified
+  - id: T02
+    from: offer_issued
+    to: renewed
+    event: customer_acceptance_completed
+  - id: T03
+    from: due
+    to: referred
+    event: normal_path_stopped
+  - id: T04
+    from: offer_issued
+    to: referred
+    event: normal_path_stopped
+published_contracts:
+  - renewals.renewal_outcome.v0
+reason_code_registry: renewal-reasons:0.1
