@@ -6,7 +6,7 @@
 - **Subtitle:** *How Fragmented Authority Destroys a Company's Ability to Compete*
 - **Author:** Adrian McPhee
 - **Publisher:** Simple is Advanced
-- **Book edition:** v2.0.3 review, 5 September 2026
+- **Book edition:** v2.0.4 review, 5 September 2026
 - **Field Guide protocol:** v0.3
 - **Public Field Guide:** <https://github.com/adrianmcphee/the_alignment_industrial_complex>
 - **Book information:** <https://simpleisadvanced.com/>

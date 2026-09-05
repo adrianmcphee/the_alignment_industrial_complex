@@ -1,5 +1,15 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.4 - 5 September 2026
+
+- Updated the companion reference to the book's v2.0.4 review edition.
+- Refreshed the front-cover artwork with a mixed-case subtitle, preserving
+  the book's title and subtitle wording and the existing back cover.
+- Refreshed the guide distribution and checksums alongside the book build.
+
+The protocol remains v0.3. Its schema and rule-set versions, validation
+contracts and reuse-licence notice are unchanged.
+
 ## v0.3 distribution refresh - 5 September 2026
 
 - Updated the companion book identity to *The Alignment-Industrial Complex:
