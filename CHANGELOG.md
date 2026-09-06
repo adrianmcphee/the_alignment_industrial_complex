@@ -1,5 +1,14 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.11 - 6 September 2026
+
+- Added the author-suggested 250 weekly mileage calls to the fictional case and public descriptions.
+- Strengthened the back-cover consequence to bonuses paid in full.
+- Centred the biography vertically beside the unchanged original photograph.
+- Published the final artwork and current guide PDF with new checksummed copies under `releases/v0.3/book-v2.0.11/`.
+
+The protocol remains v0.3; earlier copies are preserved.
+
 ## v0.3 companion refresh for book v2.0.10 - 6 September 2026
 
 - Updated the companion reference to the digital edition.

@@ -13,15 +13,15 @@ book's front and back cover images. The complete book manuscript, other book
 production files, marketing drafts, and publishing system are not part of
 this public repository.
 
-Current protocol: **v0.3**. Current companion book: **v2.0.10 digital edition,
+Current protocol: **v0.3**. Current companion book: **v2.0.11 digital edition,
 6 September 2026**. The book and protocol use independent version numbers;
 this distribution refresh does not change the protocol contracts.
 
 - [Read the Technical Field Guide](technical-field-guide.pdf)
 - [Download the source archive](technical-field-guide-source.zip)
-- [Versioned v0.3 PDF](releases/v0.3/book-v2.0.10/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3.pdf)
-- [Versioned v0.3 source archive](releases/v0.3/book-v2.0.10/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3-source.zip)
-- [Release checksums](releases/v0.3/book-v2.0.10/CHECKSUMS.sha256)
+- [Versioned v0.3 PDF](releases/v0.3/book-v2.0.11/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3.pdf)
+- [Versioned v0.3 source archive](releases/v0.3/book-v2.0.11/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3-source.zip)
+- [Release checksums](releases/v0.3/book-v2.0.11/CHECKSUMS.sha256)
 - [Read the book context](BOOK_CONTEXT.md)
 - [Front cover](assets/front-cover.png) and [back cover](assets/back-cover.png)
 - [Book information](https://simpleisadvanced.com/)
