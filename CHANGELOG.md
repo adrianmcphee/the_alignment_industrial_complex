@@ -1,5 +1,12 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.16 - 6 September 2026
+
+- Adjusted the front-cover divider and centred the orange rule on the back cover's two-line closing; wording is unchanged.
+- Published the final front and back covers and current guide PDF with new checksummed copies under `releases/v0.3/book-v2.0.16/`.
+
+The protocol remains v0.3; earlier copies are preserved. Book v2.0.15 was not published here.
+
 ## v0.3 companion refresh for book v2.0.14 - 6 September 2026
 
 - Updated the closing consequence to the author's exact wording: “The bonuses have been paid in full.”

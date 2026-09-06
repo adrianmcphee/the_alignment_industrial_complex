@@ -6,7 +6,7 @@
 - **Subtitle:** *How Fragmented Authority Destroys a Company's Ability to Compete*
 - **Author:** Adrian McPhee
 - **Publisher:** Simple is Advanced
-- **Book edition:** v2.0.14 digital edition, 6 September 2026
+- **Book edition:** v2.0.16 digital edition, 6 September 2026
 - **Field Guide protocol:** v0.3
 - **Public Field Guide:** <https://github.com/adrianmcphee/the_alignment_industrial_complex>
 - **Book information:** <https://simpleisadvanced.com/>
@@ -71,7 +71,7 @@ the change log, validation record, PDF, source archive, and checksums together.
 
 The stable reading link is [technical-field-guide.pdf](technical-field-guide.pdf),
 and the matching download is [technical-field-guide-source.zip](technical-field-guide-source.zip).
-Current copies and checksums are in [releases/v0.3/book-v2.0.14](releases/v0.3/book-v2.0.14/).
+Current copies and checksums are in [releases/v0.3/book-v2.0.16](releases/v0.3/book-v2.0.16/).
 Earlier versioned files are preserved.
 
 Public availability does not grant a reuse licence for the software,
