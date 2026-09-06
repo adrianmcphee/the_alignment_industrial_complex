@@ -13,15 +13,15 @@ book's front and back cover images. The complete book manuscript, other book
 production files, marketing drafts, and publishing system are not part of
 this public repository.
 
-Current protocol: **v0.3**. Current companion book: **v2.0.5 review edition,
-5 September 2026**. The book and protocol use independent version numbers;
+Current protocol: **v0.3**. Current companion book: **v2.0.10 digital edition,
+6 September 2026**. The book and protocol use independent version numbers;
 this distribution refresh does not change the protocol contracts.
 
 - [Read the Technical Field Guide](technical-field-guide.pdf)
 - [Download the source archive](technical-field-guide-source.zip)
-- [Versioned v0.3 PDF](releases/v0.3/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3.pdf)
-- [Versioned v0.3 source archive](releases/v0.3/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3-source.zip)
-- [Release checksums](releases/v0.3/CHECKSUMS.sha256)
+- [Versioned v0.3 PDF](releases/v0.3/book-v2.0.10/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3.pdf)
+- [Versioned v0.3 source archive](releases/v0.3/book-v2.0.10/The_Alignment_Industrial_Complex-Technical-Field-Guide-v0.3-source.zip)
+- [Release checksums](releases/v0.3/book-v2.0.10/CHECKSUMS.sha256)
 - [Read the book context](BOOK_CONTEXT.md)
 - [Front cover](assets/front-cover.png) and [back cover](assets/back-cover.png)
 - [Book information](https://simpleisadvanced.com/)
@@ -29,7 +29,8 @@ this distribution refresh does not change the protocol contracts.
 The canonical public repository is
 [adrianmcphee/the_alignment_industrial_complex](https://github.com/adrianmcphee/the_alignment_industrial_complex).
 The root PDF and archive links are stable entry points to the current guide;
-the versioned copies identify its protocol release. The book's publication is
+the versioned copies identify its protocol release and companion-book refresh.
+Earlier versioned files are preserved. The book's publication is
 managed separately from this public implementation companion.
 
 ## What is here

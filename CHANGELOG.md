@@ -1,5 +1,14 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.10 - 6 September 2026
+
+- Updated the companion reference to the digital edition.
+- Published the current front and final back cover.
+- Refreshed the stable guide PDF and source archive from the qualified book build.
+- Added checksummed copies under `releases/v0.3/book-v2.0.10/`, preserving earlier versioned files.
+
+The protocol remains v0.3. Schemas, rules, fixtures and reuse-licence notice are unchanged.
+
 ## v0.3 companion refresh for book v2.0.5 - 5 September 2026
 
 - Updated the companion reference to the book's v2.0.5 review edition.

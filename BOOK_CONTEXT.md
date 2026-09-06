@@ -6,20 +6,26 @@
 - **Subtitle:** *How Fragmented Authority Destroys a Company's Ability to Compete*
 - **Author:** Adrian McPhee
 - **Publisher:** Simple is Advanced
-- **Book edition:** v2.0.5 review, 5 September 2026
+- **Book edition:** v2.0.10 digital edition, 6 September 2026
 - **Field Guide protocol:** v0.3
 - **Public Field Guide:** <https://github.com/adrianmcphee/the_alignment_industrial_complex>
 - **Book information:** <https://simpleisadvanced.com/>
 
-The book's publication remains separate from this public guide. The review
+The book's publication remains separate from this public guide. The book
 edition number does not change the guide's schema or rule-set versions.
 
-The book argues that permanent alignment work is often a compensating industry
-for fragmented authority. Strategy, process definitions, architecture, code,
-and production evidence can remain locally correct while describing different
-companies. AI amplifies the result. A company with coherent authority can
-amplify good decisions. A company dependent on recurring alignment meetings
-can amplify the circus until it breaks.
+Letting customers correct one number online would save them a phone call and
+the insurer the cost of answering it. Customers want it, owners benefit, and
+management agrees it matters. Two years later, customers still have to call.
+
+At the fictional insurer in this book, every department can meet its targets
+while the company fails to deliver. Agreement changes none of the permissions
+required to finish. Keeping the departments aligned becomes a business of its
+own, with budgets and careers to protect.
+
+Giving someone the authority to finish means taking power from people the
+company is already rewarding. Those people help decide what changes. The
+agreed improvement is better alignment.
 
 The operating response is to draw boundaries around complete processes, give
 one owner the right to change the ordinary process, place explicit contracts at
@@ -62,7 +68,8 @@ the change log, validation record, PDF, source archive, and checksums together.
 
 The stable reading link is [technical-field-guide.pdf](technical-field-guide.pdf),
 and the matching download is [technical-field-guide-source.zip](technical-field-guide-source.zip).
-Versioned copies and checksums are in [releases/v0.3](releases/v0.3/).
+Current copies and checksums are in [releases/v0.3/book-v2.0.10](releases/v0.3/book-v2.0.10/).
+Earlier versioned files are preserved.
 
 Public availability does not grant a reuse licence for the software,
 documentation or artwork. Copyright remains with Adrian McPhee.
