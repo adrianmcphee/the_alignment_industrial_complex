@@ -1,5 +1,13 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.12 - 6 September 2026
+
+- Clarified that the 250 weekly mileage calls reach this fictional insurer.
+- Updated the consequence to “Two years of bonuses have been paid in full.”
+- Published the final back cover and current guide PDF with new checksummed copies under `releases/v0.3/book-v2.0.12/`.
+
+The protocol remains v0.3; earlier copies are preserved.
+
 ## v0.3 companion refresh for book v2.0.11 - 6 September 2026
 
 - Added the author-suggested 250 weekly mileage calls to the fictional case and public descriptions.
