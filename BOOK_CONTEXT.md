@@ -6,7 +6,7 @@
 - **Subtitle:** *How Fragmented Authority Destroys a Company's Ability to Compete*
 - **Author:** Adrian McPhee
 - **Publisher:** Simple is Advanced
-- **Book edition:** v2.0.13 digital edition, 6 September 2026
+- **Book edition:** v2.0.14 digital edition, 6 September 2026
 - **Field Guide protocol:** v0.3
 - **Public Field Guide:** <https://github.com/adrianmcphee/the_alignment_industrial_complex>
 - **Book information:** <https://simpleisadvanced.com/>
@@ -28,7 +28,7 @@ Giving someone the authority to finish means taking power from people the
 company is already rewarding. Those people help decide what changes. The
 agreed improvement is better alignment.
 
-The customer is still waiting. Two years of bonuses have been paid in full.
+The customer is still waiting. The bonuses have been paid in full.
 
 The operating response is to draw boundaries around complete processes, give
 one owner the right to change the ordinary process, place explicit contracts at
@@ -71,7 +71,7 @@ the change log, validation record, PDF, source archive, and checksums together.
 
 The stable reading link is [technical-field-guide.pdf](technical-field-guide.pdf),
 and the matching download is [technical-field-guide-source.zip](technical-field-guide-source.zip).
-Current copies and checksums are in [releases/v0.3/book-v2.0.13](releases/v0.3/book-v2.0.13/).
+Current copies and checksums are in [releases/v0.3/book-v2.0.14](releases/v0.3/book-v2.0.14/).
 Earlier versioned files are preserved.
 
 Public availability does not grant a reuse licence for the software,

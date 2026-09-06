@@ -1,5 +1,12 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.14 - 6 September 2026
+
+- Updated the closing consequence to the author's exact wording: “The bonuses have been paid in full.”
+- Published the final back cover and current guide PDF with new checksummed copies under `releases/v0.3/book-v2.0.14/`.
+
+The protocol remains v0.3; earlier copies are preserved.
+
 ## v0.3 companion refresh for book v2.0.13 - 6 September 2026
 
 - Replaced the statement of shared benefit with the author's exact wording: “Customers want it. Shareholders have been promised digital transformation. Management calls it a priority.”
