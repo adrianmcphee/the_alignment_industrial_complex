@@ -1,5 +1,12 @@
 # Change log
 
+## v0.3 companion refresh for book v2.0.13 - 6 September 2026
+
+- Replaced the statement of shared benefit with the author's exact wording: “Customers want it. Shareholders have been promised digital transformation. Management calls it a priority.”
+- Published the final back cover and current guide PDF with new checksummed copies under `releases/v0.3/book-v2.0.13/`.
+
+The protocol remains v0.3; earlier copies are preserved.
+
 ## v0.3 companion refresh for book v2.0.12 - 6 September 2026
 
 - Clarified that the 250 weekly mileage calls reach this fictional insurer.

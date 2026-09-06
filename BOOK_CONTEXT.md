@@ -6,7 +6,7 @@
 - **Subtitle:** *How Fragmented Authority Destroys a Company's Ability to Compete*
 - **Author:** Adrian McPhee
 - **Publisher:** Simple is Advanced
-- **Book edition:** v2.0.12 digital edition, 6 September 2026
+- **Book edition:** v2.0.13 digital edition, 6 September 2026
 - **Field Guide protocol:** v0.3
 - **Public Field Guide:** <https://github.com/adrianmcphee/the_alignment_industrial_complex>
 - **Book information:** <https://simpleisadvanced.com/>
@@ -15,9 +15,9 @@ The book's publication remains separate from this public guide. The book
 edition number does not change the guide's schema or rule-set versions.
 
 Every week, 250 customers call this insurer to correct their mileage. Letting
-them do it online would save customers time and the insurer money. Customers
-want it, owners benefit, and management agrees it matters. Two years later,
-the calls are still coming.
+them do it online would save customers time and the insurer money.
+Customers want it. Shareholders have been promised digital transformation. Management calls it a priority.
+Two years later, the calls are still coming.
 
 At the fictional insurer in this book, every department can meet its targets
 while the company fails to deliver. Agreement changes none of the permissions
@@ -71,7 +71,7 @@ the change log, validation record, PDF, source archive, and checksums together.
 
 The stable reading link is [technical-field-guide.pdf](technical-field-guide.pdf),
 and the matching download is [technical-field-guide-source.zip](technical-field-guide-source.zip).
-Current copies and checksums are in [releases/v0.3/book-v2.0.12](releases/v0.3/book-v2.0.12/).
+Current copies and checksums are in [releases/v0.3/book-v2.0.13](releases/v0.3/book-v2.0.13/).
 Earlier versioned files are preserved.
 
 Public availability does not grant a reuse licence for the software,
